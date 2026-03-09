@@ -95,7 +95,6 @@ A comprehensive fingerprint reader management system designed for enterprise env
 
 ### Quick Start | 快速开始
 
-```bash
 # Clone repository | 克隆仓库
 git clone https://github.com/yourusername/fingerprint-system.git
 cd fingerprint-system
@@ -104,7 +103,7 @@ cd fingerprint-system
 pip install -r requirements.txt
 
 # Run application | 运行应用
-python main.py
+python Fingerprint_login.py
 PyInstaller Build | 打包构建
 bash
 # Generate executable | 生成可执行文件
@@ -113,13 +112,13 @@ pyinstaller --onefile --windowed ^
   --add-data "nbis64.dll;." ^
   --add-data "fpcorex64.dll;." ^
   --add-data "fpengine.dll;." ^
-  指纹登陆_packaged.py
+  Fingerprint_login.py
 Note for PowerShell users: Replace ^ with ` for line continuation.
 
 📁 Project Structure | 项目结构
 text
 fingerprint-system/
-├── 📄 指纹登陆_packaged.py      # Main application entry
+├── 📄 Fingerprint_login.py      # Main application entry
 ├── 📄 requirements.txt         # Python dependencies
 ├── 📄 README.md                # This file
 ├── 📄 LICENSE                  # MIT License
