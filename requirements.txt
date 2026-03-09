@@ -1,0 +1,14 @@
+# LRU 指纹读头管理系统 - Python 依赖包
+# 版本: 5.1
+# Python 版本要求: >= 3.7
+
+# 加密库 (用于数据文件加密)
+cryptography>=41.0.0
+
+# GUI 库 (Tkinter 通常随 Python 安装,但某些环境可能需要单独安装)
+# 注意: Windows 和 macOS 的 Python 通常已包含 Tkinter
+# Linux 用户可能需要: sudo apt-get install python3-tk
+
+# PyInstaller (可选 - 仅用于打包)
+# 如果需要将程序打包为独立可执行文件,取消下面的注释
+# pyinstaller>=6.0.0

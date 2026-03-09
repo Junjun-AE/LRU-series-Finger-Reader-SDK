@@ -1,343 +1,304 @@
-# 🔐 LRU Series Fingerprint Reader Management System
-# 🔐 LRU系列指纹读头管理系统
+# LRU 指纹读头管理系统
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Platform: Windows](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
-[![Version: 5.1](https://img.shields.io/badge/version-5.1-orange.svg)](https://github.com/yourusername/fingerprint-system/releases)
+<div align="center">
 
----
+![Version](https://img.shields.io/badge/version-5.1-blue.svg)
+![Python](https://img.shields.io/badge/python-3.7+-green.svg)
+![License](https://img.shields.io/badge/license-MIT-orange.svg)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 
-**Professional Edition v5.1 | 专业版 v5.1**
+**专业的 LRU 系列指纹读头管理系统**
 
-A comprehensive fingerprint reader management system designed for enterprise environments. Features a modern dashboard interface, secure data encryption, multi-level permission management, and robust device control.
+现代化仪表板界面 | 多级权限管理 | 数据加密存储
 
-专为企业环境设计的综合性指纹读头管理系统。配备现代化仪表板界面、安全数据加密、多级权限管理和强大的设备控制功能。
-
----
-
-## 📋 Table of Contents | 目录
-
-- [✨ Key Features | 主要特性](#-key-features--主要特性)
-- [🛠️ Technical Stack | 技术栈](#️-technical-stack--技术栈)
-- [📦 Installation | 安装](#-installation--安装)
-- [📁 Project Structure | 项目结构](#-project-structure--项目结构)
-- [🚀 Usage Guide | 使用指南](#-usage-guide--使用指南)
-- [⚙️ Configuration | 配置](#️-configuration--配置)
-- [🔒 Security Notes | 安全说明](#-security-notes--安全说明)
-- [📝 Requirements | 依赖清单](#-requirements--依赖清单)
-- [🤝 Contributing | 贡献](#-contributing--贡献)
-- [📄 License | 许可证](#-license--许可证)
-- [📧 Contact | 联系方式](#-contact--联系方式)
-- [🙏 Acknowledgements | 致谢](#-acknowledgements--致谢)
+</div>
 
 ---
 
-## ✨ Key Features | 主要特性
+## 📋 目录
 
-### 🔐 Security & Reliability | 安全与可靠性
-
-| Feature | Description | 特性 | 描述 |
-|---------|-------------|------|------|
-| **Thread-safe Operations** | All GUI operations executed in main thread | **线程安全操作** | 所有GUI操作在主线程执行 |
-| **Secure Encryption** | AES-256 encryption for sensitive fingerprint data | **安全加密** | 对敏感指纹数据采用AES-256加密 |
-| **Automatic Backups** | Self-cleaning backup mechanism with configurable retention | **自动备份** | 自清理备份机制，支持配置保留数量 |
-| **Comprehensive Logging** | Detailed activity tracking with rotation support | **完整日志** | 详细的活动跟踪，支持日志轮转 |
-
-### 🎨 Modern UI | 现代化界面
-
-| Feature | Description | 特性 | 描述 |
-|---------|-------------|------|------|
-| **Dashboard Overview** | Real-time statistics and activity monitoring | **仪表板概览** | 实时统计和活动监控 |
-| **Custom Components** | Modern buttons, cards, and themed widgets | **自定义组件** | 现代化按钮、卡片和主题控件 |
-| **Responsive Design** | Adaptive layout with smooth transitions | **响应式设计** | 自适应布局，平滑过渡 |
-| **Dark Theme** | Eye-friendly dark theme for extended use | **深色主题** | 适合长时间使用的护眼主题 |
-
-### 📋 Core Functionality | 核心功能
-
-| Feature | Description | 特性 | 描述 |
-|---------|-------------|------|------|
-| **Fingerprint Enrollment** | Multi-pass enrollment with quality checks | **指纹登记** | 多次按压登记，质量检查 |
-| **Real-time Identification** | Fast matching against database | **实时识别** | 快速数据库匹配 |
-| **User Management** | CRUD operations with permission levels (1-4) | **用户管理** | 支持权限等级(1-4)的增删改查 |
-| **Data Import/Export** | Encrypted JSON format with password protection | **数据导入/导出** | 加密JSON格式，密码保护 |
-
-### 🔧 Device Management | 设备管理
-
-| Feature | Description | 特性 | 描述 |
-|---------|-------------|------|------|
-| **DLL Safety** | Secure loading mechanism for fingerprint reader drivers | **DLL安全** | 指纹读头驱动的安全加载机制 |
-| **Device Status** | Real-time connection monitoring | **设备状态** | 实时连接监控 |
-| **Model Detection** | Automatic device information retrieval | **型号检测** | 自动获取设备信息 |
-| **Error Recovery** | Graceful handling of device disconnections | **错误恢复** | 设备断连的优雅处理 |
+- [功能特性](#-功能特性)
+- [系统要求](#-系统要求)
+- [安装说明](#-安装说明)
+- [使用指南](#-使用指南)
+- [配置说明](#️-配置说明)
+- [开发说明](#-开发说明)
+- [常见问题](#-常见问题)
+- [更新日志](#-更新日志)
+- [许可证](#-许可证)
 
 ---
 
-## 🛠️ Technical Stack | 技术栈
+## ✨ 功能特性
 
-| Component | Technology | 组件 | 技术 |
-|-----------|------------|------|------|
-| **Language** | Python 3.8+ | **语言** | Python 3.8+ |
-| **GUI Framework** | Tkinter with custom theming | **GUI框架** | Tkinter + 自定义主题 |
-| **Encryption** | Cryptography (Fernet) + Base64 fallback | **加密** | Cryptography (Fernet) + Base64备用 |
-| **Threading** | Thread-safe operations with queue management | **多线程** | 带队列管理的线程安全操作 |
-| **Packaging** | PyInstaller for standalone executable | **打包** | PyInstaller生成独立可执行文件 |
+### 核心功能
+- 🔐 **指纹注册与认证** - 支持多次采集,提高识别准确率
+- 👥 **用户管理** - 完整的用户信息管理,支持姓名、ID、权限等级
+- 🔍 **高级搜索** - 按姓名、ID、权限等级快速检索
+- 📊 **数据统计** - 实时显示用户数量、各等级分布等统计信息
+
+### 数据管理
+- 💾 **数据导入/导出** - 支持 JSON 格式的数据备份与恢复
+- 🔒 **数据加密** - 可选的数据文件加密,保护敏感信息
+- 🔄 **自动备份** - 定期自动备份,防止数据丢失
+- 🧹 **备份清理** - 智能清理过期备份文件
+
+### 用户体验
+- 🎨 **现代化界面** - 深色主题,专业的仪表板设计
+- 📱 **响应式布局** - 自适应窗口大小
+- 🔔 **实时反馈** - 操作状态实时显示
+- 🌐 **多级权限** - 支持 4 级权限管理
+
+### 技术特性
+- ⚡ **线程安全** - 所有 GUI 操作在主线程执行
+- 🛡️ **异常处理** - 完善的错误处理和日志记录
+- 📦 **打包支持** - 支持 PyInstaller 打包为独立可执行文件
+- 🔧 **DLL 动态加载** - 智能定位和加载指纹设备驱动
 
 ---
 
-## 📦 Installation | 安装
+## 💻 系统要求
 
-### Prerequisites | 前置要求
+### 硬件要求
+- **指纹设备**: LRU 系列指纹读头
+- **内存**: 至少 2GB RAM
+- **存储**: 至少 100MB 可用空间
 
-- **Windows 10/11 (64-bit)**
-- **Python 3.8+** (for development)
-- **LRU Series fingerprint reader hardware**
+### 软件要求
+- **操作系统**: Windows 7/8/10/11 (64位)
+- **Python**: 3.7 或更高版本 (开发环境)
+- **依赖库**: 详见 `requirements.txt`
 
-### Quick Start | 快速开始
+### 必需的 DLL 文件
+程序需要以下 DLL 文件 (与程序放在同一目录):
+- `fpengine.dll` - 指纹引擎核心库
+- `fpcorex64.dll` - 指纹处理核心库
+- `nbis64.dll` - NBIS 算法库
 
-# Clone repository | 克隆仓库
-git clone https://github.com/yourusername/fingerprint-system.git
-cd fingerprint-system
+---
 
-# Install dependencies | 安装依赖
+## 🚀 安装说明
+
+### 方法一: 使用源码运行
+
+1. **克隆仓库**
+```bash
+git clone https://github.com/yourusername/fingerprint-login.git
+cd fingerprint-login
+```
+
+2. **安装依赖**
+```bash
 pip install -r requirements.txt
+```
 
-# Run application | 运行应用
+3. **准备 DLL 文件**
+   - 将 `fpengine.dll`、`fpcorex64.dll`、`nbis64.dll` 放在项目根目录
+
+4. **运行程序**
+```bash
 python Fingerprint_login.py
-PyInstaller Build | 打包构建
-bash
-# Generate executable | 生成可执行文件
-pyinstaller --onefile --windowed ^
-  --name "指纹管理系统" ^
-  --add-data "nbis64.dll;." ^
-  --add-data "fpcorex64.dll;." ^
-  --add-data "fpengine.dll;." ^
+```
+
+### 方法二: 使用打包的可执行文件
+
+1. **下载发行版**
+   - 从 [Releases](https://github.com/yourusername/fingerprint-login/releases) 下载最新版本
+
+2. **解压并运行**
+   - 解压文件到任意目录
+   - 双击 `Fingerprint_login.exe` 运行
+
+---
+
+## 📖 使用指南
+
+### 首次启动
+
+1. **默认登录密码**: `admin`
+2. 首次登录后建议立即修改密码
+
+### 主要操作
+
+#### 指纹注册
+1. 点击左侧菜单 **"指纹注册"**
+2. 输入用户姓名和选择权限等级
+3. 按提示将手指放在读头上 (默认需采集 3 次)
+4. 等待注册成功提示
+
+#### 指纹识别
+1. 点击左侧菜单 **"指纹识别"**
+2. 将手指放在读头上
+3. 系统自动匹配并显示用户信息
+
+#### 用户管理
+1. 点击左侧菜单 **"用户管理"**
+2. 可以查看、搜索、编辑、删除用户
+3. 编辑和删除操作需要管理员密码验证
+
+#### 数据导出
+1. 点击左侧菜单 **"数据导出"**
+2. 选择是否加密导出
+3. 选择保存位置
+
+#### 数据导入
+1. 点击左侧菜单 **"数据导入"**
+2. 选择导入文件
+3. 如果文件已加密,勾选 "文件已加密" 并输入密码
+4. 选择合并或替换模式
+
+---
+
+## ⚙️ 配置说明
+
+### 数据文件
+- **主数据文件**: `fingerprint_data.json` (在程序目录下)
+- **日志文件**: `fingerprint_system.log`
+- **备份文件**: `fingerprint_data_backup_*.json`
+
+### 权限等级说明
+- **等级 1**: 最高权限
+- **等级 2**: 高级权限
+- **等级 3**: 普通权限
+- **等级 4**: 基础权限
+
+### 修改默认密码
+首次登录后:
+1. 点击右上角设置图标
+2. 选择 "修改密码"
+3. 输入新密码并确认
+
+---
+
+## 🔧 开发说明
+
+### 项目结构
+```
+fingerprint-login/
+├── Fingerprint_login.py    # 主程序
+├── requirements.txt         # Python 依赖
+├── README.md               # 说明文档
+├── fpengine.dll            # 指纹引擎
+├── fpcorex64.dll           # 核心处理库
+├── nbis64.dll              # 算法库
+├── fingerprint_data.json   # 数据文件 (运行时生成)
+└── fingerprint_system.log  # 日志文件 (运行时生成)
+```
+
+### 打包为可执行文件
+
+使用 PyInstaller 打包:
+
+```bash
+pyinstaller --onefile --windowed --icon=app.ico \
+  --add-data "fpengine.dll;." \
+  --add-data "fpcorex64.dll;." \
+  --add-data "nbis64.dll;." \
   Fingerprint_login.py
-Note for PowerShell users: Replace ^ with ` for line continuation.
+```
 
-📁 Project Structure | 项目结构
-text
-fingerprint-system/
-├── 📄 Fingerprint_login.py      # Main application entry
-├── 📄 requirements.txt         # Python dependencies
-├── 📄 README.md                # This file
-├── 📄 LICENSE                  # MIT License
-├── 📦 nbis64.dll               # Fingerprint reader driver
-├── 📦 fpcorex64.dll            # Fingerprint reader driver
-├── 📦 fpengine.dll             # Fingerprint reader driver
-└── 📁 fingerprint_data/        # Data directory (created at runtime)
-    ├── 📄 fingerprints.dat     # Encrypted fingerprint database
-    └── 📁 backups/             # Automatic backups
-🚀 Usage Guide | 使用指南
-🔑 Login | 登录
-Default credentials: admin / admin
+### 代码架构
 
-Change password upon first login
+- **DLLLoader**: DLL 动态加载器
+- **FingerprintDevice**: 指纹设备控制类
+- **DataManager**: 数据管理类
+- **Theme**: 界面主题配置
+- **ModernButton**: 现代化按钮组件
+- **LoginWindow**: 登录窗口
+- **MainApplication**: 主应用程序
 
-默认账号：admin / admin
+### 线程安全设计
 
-首次登录后请修改密码
+所有 GUI 操作通过 `root.after()` 在主线程执行,确保界面稳定性。
 
-🔌 Device Setup | 设备设置
-Connect fingerprint reader via USB | 通过USB连接指纹读头
+---
 
-Install drivers if required | 如需要，安装驱动程序
+## ❓ 常见问题
 
-Click "Connect Device" in Device Management | 在设备管理中点击"连接设备"
+### Q1: 程序启动后提示找不到 DLL?
+**A**: 确保 `fpengine.dll`、`fpcorex64.dll`、`nbis64.dll` 与程序在同一目录。
 
-✋ Enrollment | 登记指纹
-Navigate to "Fingerprint Enrollment" | 进入"指纹登记"页面
+### Q2: 指纹识别准确率低?
+**A**: 
+- 确保手指干净、干燥
+- 注册时多次采集同一手指
+- 尝试重新注册指纹
 
-Enter user name and permission level | 输入用户名和权限等级
+### Q3: 忘记管理员密码怎么办?
+**A**: 
+- 删除 `fingerprint_data.json` 文件 (会清空所有数据)
+- 或手动编辑文件修改密码哈希值
 
-Follow on-screen instructions for fingerprint placement | 按照屏幕提示放置手指
+### Q4: 如何备份数据?
+**A**: 
+- 使用程序内的 "数据导出" 功能
+- 或直接复制 `fingerprint_data.json` 文件
 
-Multiple scans ensure template quality | 多次扫描确保模板质量
+### Q5: 程序崩溃如何查看日志?
+**A**: 打开 `fingerprint_system.log` 文件查看详细错误信息。
 
-🔍 Identification | 识别指纹
-Click "Start Identification" | 点击"开始识别"
+---
 
-Place finger on reader | 将手指放在读头上
+## 📝 更新日志
 
-System displays matching user information | 系统显示匹配的用户信息
+### v5.1 (当前版本)
+- ✅ 修复线程安全问题
+- ✅ 完善 Widget 生命周期管理
+- ✅ 增强异常处理和日志记录
+- ✅ 优化 DLL 加载机制
+- ✅ 支持 PyInstaller 打包
+- ✅ 自动清理过期备份文件
+- ✅ 改进加密解密错误处理
 
-⚙️ Configuration | 配置
-Key configuration options in code | 代码中的关键配置选项：
+### v5.0
+- 🎨 全新现代化界面设计
+- 📊 添加仪表板统计功能
+- 🔐 增加数据加密功能
 
-python
-# Encryption password (change for production)
-# 加密密码（生产环境请修改）
-self.data_manager = FingerprintDataManager(
-    encryption_password="MySecurePassword2024!"
-)
+### v4.x
+- 初始版本功能实现
 
-# Backup retention | 备份保留设置
-MAX_BACKUPS = 10
-MAX_ACTIVITY_LOG = 100
-🔒 Security Notes | 安全说明
-English	中文
-Change default password: Update the default admin password	修改默认密码：更新默认管理员密码
-Encryption key: Modify the encryption password in production	加密密钥：在生产环境中修改加密密码
-Data backups: Backups are automatically maintained in backups/	数据备份：备份自动保存在 backups/ 目录
-Secure distribution: Never commit DLLs to public repositories without consideration	安全分发：谨慎考虑将DLL文件提交到公共仓库
-📝 Requirements | 依赖清单
-txt
-cryptography>=3.4.8
-pyinstaller>=4.5.1  # for building | 用于打包
-Create a requirements.txt file with the above content.
+---
 
-创建包含以上内容的 requirements.txt 文件。
+## 📄 许可证
 
-🤝 Contributing | 贡献
-Contributions are welcome! Please feel free to submit a Pull Request.
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
 
-欢迎贡献！请随时提交Pull Request。
+---
 
-Fork the Project | Fork 项目
+## 🤝 贡献
 
-Create your Feature Branch | 创建特性分支 (git checkout -b feature/AmazingFeature)
+欢迎提交 Issue 和 Pull Request!
 
-Commit your Changes | 提交更改 (git commit -m 'Add some AmazingFeature')
+### 贡献指南
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
 
-Push to the Branch | 推送到分支 (git push origin feature/AmazingFeature)
+---
 
-Open a Pull Request | 开启Pull Request
+## 📧 联系方式
 
-📄 License | 许可证
-This project is licensed under the MIT License - see the LICENSE file for details.
+如有问题或建议,请通过以下方式联系:
 
-本项目采用MIT许可证 - 查看 LICENSE 文件了解详情。
+- 提交 [Issue](https://github.com/yourusername/fingerprint-login/issues)
+- 发送邮件至: your.email@example.com
 
-text
-MIT License
+---
 
-Copyright (c) 2026 [Your Name]
+## 🙏 致谢
 
-Permission is hereby granted...
-📧 Contact | 联系方式
-Author | 作者: [朱君]
+- 感谢 LRU 指纹设备 SDK 提供的技术支持
+- 感谢所有贡献者的付出
 
-Email | 邮箱: [1323412519@qq.com]
+---
 
+<div align="center">
 
-🙏 Acknowledgements | 致谢
-LRU Series Fingerprint Reader Hardware Documentation
-
-Python Cryptography Library Contributors
+**⭐ 如果这个项目对你有帮助,请给个 Star! ⭐**
 
-Tkinter Community
+Made with ❤️ by [Your Name]
 
-PyInstaller Documentation
-
-📊 Version History | 版本历史
-v5.1 (2026-03-09)
-
-Thread-safe GUI operations
-
-Enhanced error handling
-
-Modern dashboard UI
-
-Automatic backup cleanup
-
-v5.0 (2025-12-01)
-
-Initial professional release
-
-Multi-level permission system
-
-Encrypted data storage
-
-⚠️ Important Notes | 重要说明
-⚠️ WARNING: This software interfaces directly with fingerprint reader hardware. Ensure you have the proper authorization and comply with all applicable privacy laws and regulations before deployment.
-
-⚠️ 警告：本软件直接与指纹读头硬件交互。在部署前，请确保您拥有适当的授权并遵守所有适用的隐私法律和法规。
-
-Made with ❤️ for enterprise security
-为企业安全而设计
-
-<div align="center"> <sub>Built with Python and Tkinter | 使用 Python 和 Tkinter 构建</sub> <br> <sub>Copyright © 2026 [Your Name]. All rights reserved.</sub> </div> ```
-📝 配套文件
-1. requirements.txt
-txt
-cryptography>=3.4.8
-pyinstaller>=4.5.1
-2. LICENSE (MIT)
-txt
-MIT License
-
-Copyright (c) 2026 [Your Name]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-3. .gitignore
-gitignore
-# Python
-__pycache__/
-*.py[cod]
-*.pyc
-*.pyo
-*.pyd
-.Python
-
-# Virtual Environment
-venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Project specific
-fingerprint_data/
-*.log
-*.dat
-build/
-dist/
-*.spec
-
-# Backups
-*.bak
-📦 打包命令（已提供）
-bash
-cd C:\Users\Administrator\Desktop\指纹登陆
-pyinstaller --onefile --windowed --name "指纹管理系统" --add-data "fpengine.dll;." --add-data "fpcorex64.dll;." --add-data "nbis64.dll;." 指纹登陆_packaged.py
-这个README.md包含了：
-
-✅ 完整的中英双语对照
-
-✅ 专业的Markdown格式
-
-✅ 表格化特性展示
-
-✅ 清晰的使用指南
-
-✅ 安全说明和警告
-
-✅ 贡献指南
-
-✅ 许可证信息
-
-✅ 联系方式
-
-需要我调整任何部分吗？
+</div>
